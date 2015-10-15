@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.hurk.comentorinfo.dummy.DummyContent;
-
 /**
  * A list fragment representing a list of Websites. This fragment
  * also supports tablet devices by allowing list items to be given an
@@ -46,7 +44,7 @@ public class WebsiteListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        void onItemSelected(String id);
     }
 
     /**

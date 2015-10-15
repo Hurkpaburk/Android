@@ -2,11 +2,11 @@ package com.hurk.comentorinfo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 /**
  * A fragment representing a single Website detail screen.
@@ -52,8 +52,22 @@ public class WebsiteDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_website_detail, container, false);
         // Show the content as WebView.
         if (mItem != null) {
-                ((WebView) rootView.findViewById(R.id.website_detail))
-                        .loadUrl(mItem.getWebPage());
+            WebView web = (WebView)rootView.findViewById(R.id.website_detail);
+            web.getSettings().setLoadWithOverviewMode(true);
+            web.getSettings().setUseWideViewPort(true);
+            web.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+                    return true;
+                }
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                }
+            });
+
+             web.loadUrl(mItem.getWebPage());
+
         }
         return rootView;
     }

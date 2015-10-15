@@ -10,19 +10,20 @@ import java.util.Map;
  */
 public class WorkContent {
 
-    static public final String COMENTORADDRESS = "Comentor Address";
+    static public final String COMENTORADDRESS = "Comentor Office Location";
     public static List<WorkItem> arrayListWork = new ArrayList<WorkItem>();
 
     public static Map<String, WorkItem> WorkHashMap  =
             new HashMap<String, WorkItem>();
 
     static {
-        WorkItem company = new WorkItem("Comentor", "http://www.comentor.se");
-        WorkItem employee1 = new WorkItem("Employee Johan Bergström on LinkedIn", "https://se.linkedin.com/in/johbe");
+        WorkItem company = new WorkItem("Comentor Webpage", "https://www.comentor.se");
+        WorkItem employee1 = new WorkItem("Employee Johan Bergström", "https://se.linkedin.com/in/johbe");
         WorkItem address = new WorkItem(COMENTORADDRESS, "");
         addWork(company);
-        addWork(address);
         addWork(employee1);
+        addWork(address);
+
     }
 
     private static void addWork(WorkItem Work) {

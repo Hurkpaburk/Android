@@ -1,21 +1,34 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'MyAndroidKey'
+            keyPassword 'bajs1234'
+            storeFile file('C:/Users/Hurk/KeyStore/AndroidKeyStore.jks')
+            storePassword 'bajs1234'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-
     defaultConfig {
         applicationId "com.hurk.comentorinfo"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
+        debug {
+        }
+    }
+    productFlavors {
     }
 }
 

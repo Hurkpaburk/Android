@@ -7,6 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 /**
  * An activity representing a list of Websites. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -24,7 +30,7 @@ import android.util.Log;
  * to listen for item selections.
  */
 public class WebsiteListActivity extends AppCompatActivity
-        implements WebsiteListFragment.Callbacks {
+        implements WebsiteListFragment.Callbacks, OnMapReadyCallback {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -32,11 +38,13 @@ public class WebsiteListActivity extends AppCompatActivity
      */
     private boolean mTwoPane;
 
+    private GoogleMap map;
+    static final LatLng OFFICE = new LatLng(57.707240, 11.939818);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_website_list);
-        Log.d("TWO PANE", "BEFORE");
+        setContentView(R.layout.activity_website_app_bar);
 
         if (findViewById(R.id.website_detail_container) != null) {
             // The detail container view will be present only in the
@@ -44,7 +52,6 @@ public class WebsiteListActivity extends AppCompatActivity
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
-            Log.d("TWO PANE","TRUE");
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
                     ((WebsiteListFragment) getSupportFragmentManager()
@@ -69,8 +76,9 @@ public class WebsiteListActivity extends AppCompatActivity
             Bundle arguments = new Bundle();
 
             if (id == WorkContent.COMENTORADDRESS) {
+
                 Fragment mapFragment = new Fragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.map_fragment, mapFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.website_detail_container, mapFragment).commit();
             }
             else {
                 arguments.putString(WebsiteDetailFragment.ARG_ITEM_ID, id);
@@ -83,7 +91,7 @@ public class WebsiteListActivity extends AppCompatActivity
         } else {
 
             if (id == WorkContent.COMENTORADDRESS) {
-                Intent mapIntent = new Intent(this, MapFragment.class);
+                Intent mapIntent = new Intent(this, MapActivity.class);
                 startActivity(mapIntent);
             } else {
                 // In single-pane mode, simply start the detail activity
@@ -93,5 +101,11 @@ public class WebsiteListActivity extends AppCompatActivity
                 startActivity(detailIntent);
             }
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        map.addMarker(new MarkerOptions().position(OFFICE).title("Comentor AB\nLindholmspiren 5A"));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(OFFICE, 17));
     }
 }

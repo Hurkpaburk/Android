@@ -3,6 +3,7 @@
     package="com.hurk.comentorinfo" >
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -27,7 +28,7 @@
                 android:value=".WebsiteListActivity" />
         </activity>
         <activity
-            android:name=".MapFragment"
+            android:name=".MapActivity"
             android:label="@string/title_Map"
             android:parentActivityName=".WebsiteListActivity" >
             <meta-data
@@ -36,7 +37,7 @@
         </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAiG9rWVh0lFV9eaCy9g_MUVRQri_uLac0" />
+            android:value="AIzaSyCcGRiZeaqJ3yXyfN6_9OLE8LfddoZgTLA" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
