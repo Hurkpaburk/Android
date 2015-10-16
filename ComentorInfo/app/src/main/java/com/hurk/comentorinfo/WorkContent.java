@@ -11,19 +11,23 @@ import java.util.Map;
 public class WorkContent {
 
     static public final String COMENTORADDRESS = "Comentor Office Location";
+    static public final String COMENTORWEBPAGE = "Comentor Webpage";
+    static public final String EMPLOYEEJOHAN = "Employee Johan Bergström";
+    static public final String ABOUT = "About Application";
     public static List<WorkItem> arrayListWork = new ArrayList<WorkItem>();
 
-    public static Map<String, WorkItem> WorkHashMap  =
+    public static Map<String, WorkItem> WorkHashMap =
             new HashMap<String, WorkItem>();
 
     static {
-        WorkItem company = new WorkItem("Comentor Webpage", "https://www.comentor.se");
-        WorkItem employee1 = new WorkItem("Employee Johan Bergström", "https://se.linkedin.com/in/johbe");
+        WorkItem company = new WorkItem(COMENTORWEBPAGE, "https://www.comentor.se");
+        WorkItem employee1 = new WorkItem(EMPLOYEEJOHAN, "https://se.linkedin.com/in/johbe");
         WorkItem address = new WorkItem(COMENTORADDRESS, "");
+        WorkItem about = new WorkItem(ABOUT, "");
         addWork(company);
         addWork(employee1);
         addWork(address);
-
+        addWork(about);
     }
 
     private static void addWork(WorkItem Work) {

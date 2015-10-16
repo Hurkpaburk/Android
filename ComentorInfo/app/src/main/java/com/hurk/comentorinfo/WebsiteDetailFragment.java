@@ -52,7 +52,7 @@ public class WebsiteDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_website_detail, container, false);
         // Show the content as WebView.
         if (mItem != null) {
-            WebView web = (WebView)rootView.findViewById(R.id.website_detail);
+            WebView web = (WebView) rootView.findViewById(R.id.website_detail);
             web.getSettings().setLoadWithOverviewMode(true);
             web.getSettings().setUseWideViewPort(true);
             web.setWebViewClient(new WebViewClient() {
@@ -61,12 +61,13 @@ public class WebsiteDetailFragment extends Fragment {
                     view.loadUrl(url);
                     return true;
                 }
+
                 @Override
                 public void onPageFinished(WebView view, String url) {
                 }
             });
 
-             web.loadUrl(mItem.getWebPage());
+            web.loadUrl(mItem.getWebPage());
 
         }
         return rootView;

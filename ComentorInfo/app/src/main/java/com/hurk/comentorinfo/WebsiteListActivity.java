@@ -3,13 +3,12 @@ package com.hurk.comentorinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -32,14 +31,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class WebsiteListActivity extends AppCompatActivity
         implements WebsiteListFragment.Callbacks, OnMapReadyCallback {
 
+    static final LatLng OFFICE = new LatLng(57.707240, 11.939818);
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private boolean mTwoPane;
-
     private GoogleMap map;
-    static final LatLng OFFICE = new LatLng(57.707240, 11.939818);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +52,8 @@ public class WebsiteListActivity extends AppCompatActivity
             mTwoPane = true;
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-                    ((WebsiteListFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.website_list))
+            ((WebsiteListFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.website_list))
                     .setActivateOnItemClick(true);
         }
     }
@@ -67,7 +65,6 @@ public class WebsiteListActivity extends AppCompatActivity
     @Override
     public void onItemSelected(String id) {
 
-        Log.d("id", id);
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -77,10 +74,13 @@ public class WebsiteListActivity extends AppCompatActivity
 
             if (id == WorkContent.COMENTORADDRESS) {
 
-                Fragment mapFragment = new Fragment();
+                SupportMapFragment mapFragment = new SupportMapFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.website_detail_container, mapFragment).commit();
-            }
-            else {
+                mapFragment.getMapAsync(this);
+            } else if (id == WorkContent.ABOUT) {
+                AboutFragment textFrag = new AboutFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.website_detail_container, textFrag).commit();
+            } else {
                 arguments.putString(WebsiteDetailFragment.ARG_ITEM_ID, id);
                 WebsiteDetailFragment fragment = new WebsiteDetailFragment();
                 fragment.setArguments(arguments);
@@ -93,6 +93,9 @@ public class WebsiteListActivity extends AppCompatActivity
             if (id == WorkContent.COMENTORADDRESS) {
                 Intent mapIntent = new Intent(this, MapActivity.class);
                 startActivity(mapIntent);
+            } else if (id == WorkContent.ABOUT) {
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
             } else {
                 // In single-pane mode, simply start the detail activity
                 // for the selected item ID.

@@ -3,6 +3,7 @@
     <string name="title_website_detail">Website Detail</string>
     <string name="title_Map">Google Map</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="aboutUsTitleText">Comentor AB information</string>
+    <string name="aboutUsText">This app contain a summary of Comentor AB</string>
+    <string name="title_activity_about">About</string>
 </resources>
